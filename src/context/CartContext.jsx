@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react'
 
 const CartContext = createContext(null)
 
@@ -12,14 +12,29 @@ export function CartProvider({ children }) {
     }
   })
   const [isOpen, setIsOpen] = useState(false)
+  const [notification, setNotification] = useState(null)
+  const toastTimer = useRef(null)
 
   useEffect(() => {
     localStorage.setItem('moonlight_cart', JSON.stringify(items))
   }, [items])
 
+  const showNotification = useCallback((message, type = 'info') => {
+    if (toastTimer.current) clearTimeout(toastTimer.current)
+    setNotification({ message, type, id: Date.now() })
+    toastTimer.current = setTimeout(() => setNotification(null), 3200)
+  }, [])
+
+  const clearNotification = useCallback(() => {
+    if (toastTimer.current) clearTimeout(toastTimer.current)
+    setNotification(null)
+  }, [])
+
   const addItem = (product, quantity = 1, size = 'medium') => {
+    const key = `${product.id}-${size}`
+    const alreadyInCart = items.some(i => i.key === key)
+
     setItems(prev => {
-      const key = `${product.id}-${size}`
       const existing = prev.find(i => i.key === key)
       if (existing) {
         const newQty = Math.min(existing.quantity + quantity, 20)
@@ -29,6 +44,10 @@ export function CartProvider({ children }) {
       }
       return [...prev, { ...product, key, size, quantity }]
     })
+
+    if (alreadyInCart) {
+      showNotification('¡Ya lo tenías! Sumamos +1 a tu pedido ☕', 'info')
+    }
     setIsOpen(true)
   }
 
@@ -51,7 +70,8 @@ export function CartProvider({ children }) {
     <CartContext.Provider value={{
       items, isOpen, setIsOpen,
       addItem, removeItem, updateQuantity, clearCart,
-      totalItems, totalPrice
+      totalItems, totalPrice,
+      notification, clearNotification
     }}>
       {children}
     </CartContext.Provider>
