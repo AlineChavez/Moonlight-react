@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useCart } from '../../context/CartContext'
 import { formatPrice } from '../../utils/formatters'
 import styles from './ProductCard.module.css'
@@ -8,6 +8,17 @@ const SIZES = [
   { id: 'medium', label: 'M', multiplier: 1 },
   { id: 'large', label: 'L', multiplier: 1.2 },
 ]
+
+const PRODUCT_IMAGES = {
+  1: '/imag1.png',
+  2: '/imag2.png',
+  3: '/imag3.png',
+  4: '/imag4.png',
+  5: '/imag5.png',
+  6: '/imag6.png',
+  7: '/imag7.png',
+  8: '/imag8.png',
+}
 
 const CATEGORY_ICONS = {
   espresso: '☕',
@@ -23,6 +34,7 @@ export default function ProductCard({ product }) {
 
   const size = SIZES.find(s => s.id === selectedSize)
   const finalPrice = product.price * size.multiplier
+  const imageUrl = PRODUCT_IMAGES[product.id]
 
   const handleAdd = () => {
     addItem({ ...product, price: finalPrice }, 1, selectedSize)
@@ -33,11 +45,19 @@ export default function ProductCard({ product }) {
   return (
     <article className={styles.card}>
       <div className={styles.imageWrap}>
-        <div className={styles.imagePlaceholder}>
-          <span className={styles.categoryIcon}>
-            {CATEGORY_ICONS[product.category] || '☕'}
-          </span>
-        </div>
+        {imageUrl ? (
+          <img
+            src={imageUrl}
+            alt={product.name}
+            className={styles.image}
+          />
+        ) : (
+          <div className={styles.imagePlaceholder}>
+            <span className={styles.categoryIcon}>
+              {CATEGORY_ICONS[product.category] || '☕'}
+            </span>
+          </div>
+        )}
         {product.featured && (
           <span className={styles.featuredBadge}>Destacado</span>
         )}
