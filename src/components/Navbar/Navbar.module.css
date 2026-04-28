@@ -97,7 +97,18 @@
 }
 .loginBtn:hover { background: var(--color-caramel); color: var(--color-white); }
 
-.userMenu { position: relative; }
+.userMenu {
+  position: relative;
+}
+
+.userMenu::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 8px;
+}
 
 .avatar {
   width: 36px; height: 36px;
@@ -113,7 +124,7 @@
 
 .dropdown {
   position: absolute;
-  top: calc(100% + 12px);
+  top: calc(100% + 4px);
   right: 0;
   min-width: 180px;
   background: var(--color-espresso);
@@ -125,6 +136,7 @@
   transform: translateY(-8px);
   transition: all var(--transition);
 }
+
 .userMenu:hover .dropdown,
 .userMenu:focus-within .dropdown {
   opacity: 1;
