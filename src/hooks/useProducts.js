@@ -15,7 +15,7 @@ export function useProducts(initialCategory = 'all') {
       const data = await productService.getAll(params)
       const list = Array.isArray(data) ? data : data.content ?? []
       setProducts(list)
-    } catch (err) {
+    } catch {
       setError('No se pudo conectar al servidor. Asegúrate que el backend está corriendo.')
       setProducts([])
     } finally {
@@ -23,6 +23,7 @@ export function useProducts(initialCategory = 'all') {
     }
   }, [category])
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { fetchProducts() }, [fetchProducts])
 
   return { products, loading, error, category, setCategory, refetch: fetchProducts }

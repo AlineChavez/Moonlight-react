@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import ProductCard from '../components/Catalog/ProductCard'
 import { useProducts } from '../hooks/useProducts'
 import { CATEGORIES } from '../services/productService'

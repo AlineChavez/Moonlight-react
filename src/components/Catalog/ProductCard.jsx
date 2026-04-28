@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useCart } from '../../context/CartContext'
 import { formatPrice } from '../../utils/formatters'
 import styles from './ProductCard.module.css'
