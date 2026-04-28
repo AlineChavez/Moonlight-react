@@ -1,25 +1,39 @@
+import React from 'react'
 import { useCart } from '../../context/CartContext'
 import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { formatPrice } from '../../utils/formatters'
+import { orderService } from '../../services/orderService'
 import styles from './Cart.module.css'
 
 export default function Cart() {
-  const { items, isOpen, setIsOpen, removeItem, updateQuantity, totalPrice, clearCart, showNotification } = useCart()
+  const { items, isOpen, setIsOpen, removeItem, updateQuantity, totalPrice, clearCart } = useCart()
   const { isAuthenticated } = useAuth()
   const navigate = useNavigate()
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     setIsOpen(false)
     if (!isAuthenticated) {
       navigate('/login?redirect=checkout')
       return
     }
-    clearCart()
-    showNotification('¡Pedido en camino!', 'success', {
-      icon: '✓',
-      subtitle: 'Lo estamos preparando para ti',
-    })
+
+    try {
+      const orderData = {
+        items: items.map(item => ({
+          id: item.id,
+          name: item.name,
+          size: item.size,
+          quantity: item.quantity,
+          price: item.price
+        }))
+      }
+      await orderService.create(orderData)
+      clearCart()
+      navigate('/orders')
+    } catch (err) {
+      alert('Error al confirmar el pedido. Intenta de nuevo.')
+    }
   }
 
   if (!isOpen) return null
