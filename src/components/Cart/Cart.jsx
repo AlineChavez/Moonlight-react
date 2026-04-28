@@ -5,7 +5,7 @@ import { formatPrice } from '../../utils/formatters'
 import styles from './Cart.module.css'
 
 export default function Cart() {
-  const { items, isOpen, setIsOpen, removeItem, updateQuantity, totalPrice, clearCart } = useCart()
+  const { items, isOpen, setIsOpen, removeItem, updateQuantity, totalPrice, clearCart, showNotification } = useCart()
   const { isAuthenticated } = useAuth()
   const navigate = useNavigate()
 
@@ -13,9 +13,13 @@ export default function Cart() {
     setIsOpen(false)
     if (!isAuthenticated) {
       navigate('/login?redirect=checkout')
-    } else {
-      navigate('/checkout')
+      return
     }
+    clearCart()
+    showNotification('¡Pedido en camino!', 'success', {
+      icon: '✓',
+      subtitle: 'Lo estamos preparando para ti',
+    })
   }
 
   if (!isOpen) return null

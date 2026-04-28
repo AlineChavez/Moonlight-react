@@ -19,10 +19,10 @@ export function CartProvider({ children }) {
     localStorage.setItem('moonlight_cart', JSON.stringify(items))
   }, [items])
 
-  const showNotification = useCallback((message, type = 'info') => {
+  const showNotification = useCallback((message, type = 'info', opts = {}) => {
     if (toastTimer.current) clearTimeout(toastTimer.current)
-    setNotification({ message, type, id: Date.now() })
-    toastTimer.current = setTimeout(() => setNotification(null), 3200)
+    setNotification({ message, type, id: Date.now(), ...opts })
+    toastTimer.current = setTimeout(() => setNotification(null), 3800)
   }, [])
 
   const clearNotification = useCallback(() => {
@@ -46,7 +46,7 @@ export function CartProvider({ children }) {
     })
 
     if (alreadyInCart) {
-      showNotification('¡Ya lo tenías! Sumamos +1 a tu pedido ☕', 'info')
+      showNotification('Ya está en tu pedido', 'info', { icon: '☕', subtitle: 'Sumamos +1 a la cantidad' })
     }
     setIsOpen(true)
   }
@@ -71,7 +71,7 @@ export function CartProvider({ children }) {
       items, isOpen, setIsOpen,
       addItem, removeItem, updateQuantity, clearCart,
       totalItems, totalPrice,
-      notification, clearNotification
+      notification, clearNotification, showNotification
     }}>
       {children}
     </CartContext.Provider>

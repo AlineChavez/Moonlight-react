@@ -7,11 +7,7 @@ export default function Toast() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    if (notification) {
-      setVisible(true)
-    } else {
-      setVisible(false)
-    }
+    setVisible(!!notification)
   }, [notification])
 
   if (!notification) return null
@@ -22,7 +18,21 @@ export default function Toast() {
       role="status"
       aria-live="polite"
     >
-      <span className={styles.message}>{notification.message}</span>
+      {notification.icon && (
+        <span className={styles.icon} aria-hidden="true">{notification.icon}</span>
+      )}
+
+      <div className={styles.body}>
+        {notification.subtitle ? (
+          <>
+            <span className={styles.title}>{notification.message}</span>
+            <span className={styles.subtitle}>{notification.subtitle}</span>
+          </>
+        ) : (
+          <span className={styles.message}>{notification.message}</span>
+        )}
+      </div>
+
       <button className={styles.close} onClick={clearNotification} aria-label="Cerrar">✕</button>
     </div>
   )
