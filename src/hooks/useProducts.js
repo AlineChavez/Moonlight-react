@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { productService, MOCK_PRODUCTS } from '../services/productService'
+import { productService } from '../services/productService'
 
 export function useProducts(initialCategory = 'all') {
   const [products, setProducts] = useState([])
@@ -15,12 +15,9 @@ export function useProducts(initialCategory = 'all') {
       const data = await productService.getAll(params)
       const list = Array.isArray(data) ? data : data.content ?? []
       setProducts(list)
-    } catch {
-      const filtered = category === 'all'
-        ? MOCK_PRODUCTS
-        : MOCK_PRODUCTS.filter(p => p.category === category)
-      setProducts(filtered)
-      setError(null)
+    } catch (err) {
+      setError('No se pudo conectar al servidor. Asegúrate que el backend está corriendo.')
+      setProducts([])
     } finally {
       setLoading(false)
     }
