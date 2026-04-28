@@ -1,0 +1,187 @@
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.5rem 0;
+  transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+}
+
+.scrolled {
+  background: rgba(26, 15, 10, 0.96);
+  backdrop-filter: blur(12px);
+  padding: 0.9rem 0;
+  box-shadow: var(--shadow-md);
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: auto;
+}
+
+.logoIcon { font-size: 1.4rem; }
+
+.logoText {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-cream);
+  letter-spacing: 0.02em;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.navLink {
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245, 237, 224, 0.75);
+  transition: color var(--transition);
+}
+.navLink:hover { color: var(--color-cream); }
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cartBtn {
+  position: relative;
+  background: none;
+  color: var(--color-cream);
+  padding: 0.4rem;
+  transition: color var(--transition);
+}
+.cartBtn:hover { color: var(--color-caramel); }
+
+.badge {
+  position: absolute;
+  top: -4px; right: -6px;
+  background: var(--color-caramel);
+  color: var(--color-espresso);
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 18px; height: 18px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginBtn {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-espresso);
+  background: var(--color-cream);
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--radius-full);
+  transition: background var(--transition), color var(--transition);
+}
+.loginBtn:hover { background: var(--color-caramel); color: var(--color-white); }
+
+.userMenu { position: relative; }
+
+.avatar {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-full);
+  background: var(--color-caramel);
+  color: var(--color-espresso);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--transition);
+}
+.avatar:hover { transform: scale(1.05); }
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  min-width: 180px;
+  background: var(--color-espresso);
+  border: 1px solid var(--color-medium-roast);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: all var(--transition);
+}
+.userMenu:hover .dropdown,
+.userMenu:focus-within .dropdown {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+.dropdownName {
+  display: block;
+  padding: 0.5rem 0.75rem 0.75rem;
+  font-size: 0.8rem;
+  color: var(--color-caramel);
+  border-bottom: 1px solid var(--color-medium-roast);
+  margin-bottom: 0.25rem;
+}
+
+.dropdownItem {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.85rem;
+  color: var(--color-latte);
+  background: none;
+  text-align: left;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition);
+  cursor: pointer;
+}
+.dropdownItem:hover { background: var(--color-dark-roast); }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--color-cream);
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(26,15,10,0.98);
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition);
+  }
+  .navOpen { opacity: 1; pointer-events: all; }
+  .navLink { font-size: 1.5rem; }
+}

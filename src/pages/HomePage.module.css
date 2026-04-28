@@ -1,0 +1,125 @@
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.featured {
+  padding: 6rem 0;
+  background: var(--color-foam);
+}
+
+.sectionHead {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-caramel);
+  margin-bottom: 0.75rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400;
+  color: var(--color-espresso);
+}
+
+.sectionTitleLight {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400;
+  color: var(--color-cream);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  animation: fadeUp 0.6s ease;
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.skeleton {
+  border-radius: var(--radius-lg);
+  background: linear-gradient(90deg, var(--color-latte) 25%, var(--color-cream) 50%, var(--color-latte) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  aspect-ratio: 3/4;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.ctaWrap {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.cta {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--color-espresso);
+  border-bottom: 1px solid var(--color-caramel);
+  padding-bottom: 2px;
+  transition: color var(--transition);
+}
+.cta:hover { color: var(--color-caramel); }
+
+.values {
+  padding: 6rem 0;
+  background: var(--color-espresso);
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+.valueCard {
+  padding: 2rem 1.5rem;
+  border: 1px solid rgba(192,125,58,0.2);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  transition: border-color var(--transition), transform var(--transition);
+}
+.valueCard:hover {
+  border-color: rgba(192,125,58,0.5);
+  transform: translateY(-4px);
+}
+
+.valueIcon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.valueTitle {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--color-cream);
+  margin-bottom: 0.75rem;
+}
+
+.valueText {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: rgba(245,237,224,0.55);
+}
