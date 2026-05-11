@@ -1,37 +1,25 @@
-import { useState } from 'react'
 import { useCart } from '../../context/CartContext'
 import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { formatPrice } from '../../utils/formatters'
-import { orderService } from '../../services/orderService'
 import styles from './Cart.module.css'
 
 export default function Cart() {
   const { items, isOpen, setIsOpen, removeItem, updateQuantity, totalPrice, clearCart, showNotification } = useCart()
   const { isAuthenticated } = useAuth()
   const navigate = useNavigate()
-  const [placing, setPlacing] = useState(false)
 
-  const handleCheckout = async () => {
+  const handleCheckout = () => {
+    setIsOpen(false)
     if (!isAuthenticated) {
-      setIsOpen(false)
       navigate('/login?redirect=checkout')
       return
     }
-    setPlacing(true)
-    try {
-      await orderService.create({ items })
-      setIsOpen(false)
-      clearCart()
-      showNotification('¡Pedido en camino!', 'success', {
-        icon: '✓',
-        subtitle: 'Lo estamos preparando para ti',
-      })
-    } catch {
-      showNotification('No se pudo crear el pedido', 'error', { icon: '✕' })
-    } finally {
-      setPlacing(false)
-    }
+    clearCart()
+    showNotification('¡Pedido en camino!', 'success', {
+      icon: '✓',
+      subtitle: 'Lo estamos preparando para ti',
+    })
   }
 
   if (!isOpen) return null
@@ -75,8 +63,8 @@ export default function Cart() {
                 <span>{formatPrice(totalPrice)}</span>
               </div>
               <p className={styles.note}>Delivery calculado al confirmar</p>
-              <button className={styles.checkoutBtn} onClick={handleCheckout} disabled={placing}>
-                {placing ? 'Procesando...' : isAuthenticated ? 'Confirmar Pedido' : 'Iniciar Sesión para Pedir'}
+              <button className={styles.checkoutBtn} onClick={handleCheckout}>
+                {isAuthenticated ? 'Confirmar Pedido' : 'Iniciar Sesión para Pedir'}
               </button>
               <button className={styles.clearBtn} onClick={clearCart}>
                 Vaciar carrito
