@@ -6,7 +6,8 @@
   background: var(--color-espresso);
   padding: 2rem;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .wrapper::before {
