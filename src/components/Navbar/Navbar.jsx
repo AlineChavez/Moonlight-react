@@ -33,7 +33,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
+    <header className={`${styles.navbar} ${scrolled && !menuOpen ? styles.scrolled : ''}`}>
       <div className={styles.inner}>
 
         <Link to="/" className={styles.logo}>
