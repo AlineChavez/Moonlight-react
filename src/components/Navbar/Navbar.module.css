@@ -186,13 +186,14 @@
   .nav {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(26,15,10,0.98);
+    background: rgb(26,15,10);
     flex-direction: column;
     justify-content: center;
     gap: 3rem;
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--transition);
+    z-index: 200;
   }
   .navOpen { opacity: 1; pointer-events: all; }
   .navLink { font-size: 1.5rem; }
