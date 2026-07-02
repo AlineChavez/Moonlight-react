@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { formatPrice } from '../../utils/formatters'
 import { orderService } from '../../services/orderService'
+import { MoonIcon, CheckIcon, XIcon } from '../icons/Icons'
 import styles from './Cart.module.css'
 
 export default function Cart() {
@@ -24,11 +25,12 @@ export default function Cart() {
       setIsOpen(false)
       clearCart()
       showNotification('¡Pedido en camino!', 'success', {
-        icon: '✓',
+        icon: <CheckIcon size={16} />,
         subtitle: 'Lo estamos preparando para ti',
       })
-    } catch {
-      showNotification('No se pudo crear el pedido', 'error', { icon: '✕' })
+    } catch (err) {
+      const msg = err.response?.data?.message || 'No se pudo crear el pedido'
+      showNotification(msg, 'error', { icon: <XIcon size={16} /> })
     } finally {
       setPlacing(false)
     }
@@ -42,12 +44,14 @@ export default function Cart() {
       <aside className={styles.cart}>
         <div className={styles.header}>
           <h2 className={styles.title}>Tu Pedido</h2>
-          <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>✕</button>
+          <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>
+            <XIcon size={18} />
+          </button>
         </div>
 
         {items.length === 0 ? (
           <div className={styles.empty}>
-            <span className={styles.emptyIcon}>🌙</span>
+            <MoonIcon size={40} className={styles.emptyIcon} />
             <p>Tu carrito está vacío</p>
             <button
               className={styles.browseBtn}
@@ -103,7 +107,9 @@ function CartItem({ item, onRemove, onQuantity }) {
         <button className={styles.qtyBtn} onClick={() => onQuantity(item.quantity + 1)}>+</button>
       </div>
       <span className={styles.itemPrice}>{formatPrice(item.price * item.quantity)}</span>
-      <button className={styles.removeBtn} onClick={onRemove}>✕</button>
+      <button className={styles.removeBtn} onClick={onRemove} aria-label="Quitar producto">
+        <XIcon size={14} />
+      </button>
     </li>
   )
 }

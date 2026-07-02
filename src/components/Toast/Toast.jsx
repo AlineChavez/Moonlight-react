@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useCart } from '../../context/CartContext'
+import { XIcon } from '../icons/Icons'
 import styles from './Toast.module.css'
 
 export default function Toast() {
@@ -33,7 +34,9 @@ export default function Toast() {
         )}
       </div>
 
-      <button className={styles.close} onClick={clearNotification} aria-label="Cerrar">✕</button>
+      <button className={styles.close} onClick={clearNotification} aria-label="Cerrar">
+        <XIcon size={13} />
+      </button>
     </div>
   )
 }

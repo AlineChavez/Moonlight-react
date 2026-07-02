@@ -14,5 +14,21 @@ export const orderService = {
   async getById(id) {
     const { data } = await api.get(`/orders/${id}`)
     return data
+  },
+
+  async cancel(id) {
+    const { data } = await api.patch(`/orders/${id}/cancel`)
+    return data
+  },
+
+  // Admin-only endpoints
+  async getAll() {
+    const { data } = await api.get('/orders')
+    return data
+  },
+
+  async updateStatus(id, status) {
+    const { data } = await api.patch(`/orders/${id}/status`, { status })
+    return data
   }
 }

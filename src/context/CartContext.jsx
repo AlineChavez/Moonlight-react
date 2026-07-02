@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react'
+import { CoffeeIcon } from '../components/icons/Icons'
 
 const CartContext = createContext(null)
 
@@ -46,7 +47,7 @@ export function CartProvider({ children }) {
     })
 
     if (alreadyInCart) {
-      showNotification('Ya está en tu pedido', 'info', { icon: '☕', subtitle: 'Sumamos +1 a la cantidad' })
+      showNotification('Ya está en tu pedido', 'info', { icon: <CoffeeIcon size={16} />, subtitle: 'Sumamos +1 a la cantidad' })
     }
     setIsOpen(true)
   }

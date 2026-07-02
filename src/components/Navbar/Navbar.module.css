@@ -29,7 +29,7 @@
   margin-right: auto;
 }
 
-.logoIcon { font-size: 1.4rem; }
+.logoIcon { color: var(--color-caramel); flex-shrink: 0; }
 
 .logoText {
   font-family: var(--font-display);

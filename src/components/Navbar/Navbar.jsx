@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { useCart } from '../../context/CartContext'
 import { getInitials } from '../../utils/formatters'
+import { MoonIcon } from '../icons/Icons'
 import styles from './Navbar.module.css'
 
 export default function Navbar() {
@@ -37,7 +38,7 @@ export default function Navbar() {
       <div className={styles.inner}>
 
         <Link to="/" className={styles.logo}>
-          <span className={styles.logoIcon}>🌙</span>
+          <MoonIcon size={20} className={styles.logoIcon} />
           <span className={styles.logoText}>Moonlight</span>
         </Link>
 
@@ -45,6 +46,12 @@ export default function Navbar() {
           <Link to="/" className={styles.navLink}>Inicio</Link>
           <Link to="/catalog" className={styles.navLink}>Menú</Link>
           {user && <Link to="/orders" className={styles.navLink}>Mis Pedidos</Link>}
+          {user?.role === 'ADMIN' && (
+            <>
+              <Link to="/admin/orders" className={styles.navLink}>Admin Pedidos</Link>
+              <Link to="/admin/products" className={styles.navLink}>Admin Productos</Link>
+            </>
+          )}
         </nav>
 
         <div className={styles.actions}>
@@ -67,6 +74,12 @@ export default function Navbar() {
               <div className={styles.dropdown}>
                 <span className={styles.dropdownName}>{user.name}</span>
                 <Link to="/orders" className={styles.dropdownItem}>Mis Pedidos</Link>
+                {user.role === 'ADMIN' && (
+                  <>
+                    <Link to="/admin/orders" className={styles.dropdownItem}>Admin Pedidos</Link>
+                    <Link to="/admin/products" className={styles.dropdownItem}>Admin Productos</Link>
+                  </>
+                )}
                 <button className={styles.dropdownItem} onClick={handleLogout}>
                   Cerrar Sesión
                 </button>

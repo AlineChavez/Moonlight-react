@@ -23,3 +23,8 @@ export function getInitials(name) {
   if (!name) return '?'
   return name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase()
 }
+
+export function capitalize(str) {
+  if (!str) return ''
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}

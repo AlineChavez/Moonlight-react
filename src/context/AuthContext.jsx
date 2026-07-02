@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 import { authService } from '../services/authService'
 
 const AuthContext = createContext(null)
@@ -14,6 +14,28 @@ export function AuthProvider({ children }) {
       return null
     }
   })
+  const [loading, setLoading] = useState(() => !!localStorage.getItem('moonlight_token'))
+
+  // Validates the cached token against the backend on load and refreshes the
+  // stored user (e.g. role changes elsewhere), instead of trusting stale
+  // localStorage indefinitely. A failed/expired token logs the session out
+  // locally; the axios interceptor already handles redirecting on a live 401.
+  useEffect(() => {
+    const token = localStorage.getItem('moonlight_token')
+    if (!token) return
+
+    authService.getProfile()
+      .then(profile => {
+        setUser(profile)
+        localStorage.setItem('moonlight_user', JSON.stringify(profile))
+      })
+      .catch(() => {
+        setUser(null)
+        localStorage.removeItem('moonlight_user')
+        localStorage.removeItem('moonlight_token')
+      })
+      .finally(() => setLoading(false))
+  }, [])
 
   const login = async (email, password) => {
     const data = await authService.login(email, password)
@@ -37,7 +59,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('moonlight_token')
   }
 
-  const value = { user, loading: false, login, register, logout, isAuthenticated: !!user }
+  const value = { user, loading, login, register, logout, isAuthenticated: !!user }
 
   return (
     <AuthContext.Provider value={value}>

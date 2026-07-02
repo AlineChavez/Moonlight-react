@@ -36,7 +36,7 @@
   color: rgba(26,15,10,0.4);
   font-size: 1rem;
 }
-.empty span { font-size: 2.5rem; }
+.empty svg { opacity: 0.6; }
 
 .catalogLink {
   padding: 0.7rem 1.5rem;
@@ -110,3 +110,21 @@
   font-weight: 600;
   color: var(--color-espresso);
 }
+
+.cancelBtn {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.7rem;
+  background: none;
+  border: 1.5px solid var(--color-error);
+  color: var(--color-error);
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: background var(--transition), color var(--transition);
+}
+.cancelBtn:hover:not(:disabled) {
+  background: var(--color-error);
+  color: var(--color-white);
+}
+.cancelBtn:disabled { opacity: 0.6; cursor: not-allowed; }

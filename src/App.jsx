@@ -9,6 +9,8 @@ import HomePage from './pages/HomePage'
 import CatalogPage from './pages/CatalogPage'
 import LoginPage from './pages/LoginPage'
 import OrdersPage from './pages/OrdersPage'
+import AdminOrdersPage from './pages/AdminOrdersPage'
+import AdminProductsPage from './pages/AdminProductsPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 export default function App() {
@@ -24,6 +26,8 @@ export default function App() {
             <Route path="/catalog" element={<CatalogPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/orders" element={<OrdersPage />} />
+            <Route path="/admin/orders" element={<AdminOrdersPage />} />
+            <Route path="/admin/products" element={<AdminProductsPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <Footer />

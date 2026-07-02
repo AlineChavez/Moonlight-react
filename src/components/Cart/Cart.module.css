@@ -51,7 +51,7 @@
   gap: 1rem;
   color: rgba(26,15,10,0.4);
 }
-.emptyIcon { font-size: 3rem; opacity: 0.5; }
+.emptyIcon { opacity: 0.5; }
 
 .browseBtn {
   padding: 0.7rem 1.5rem;

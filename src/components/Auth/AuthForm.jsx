@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { isValidEmail, isValidPassword } from '../../utils/formatters'
+import { MoonIcon } from '../icons/Icons'
 import styles from './AuthForm.module.css'
 
 export default function AuthForm({ mode = 'login' }) {
@@ -62,7 +63,7 @@ export default function AuthForm({ mode = 'login' }) {
     <div className={styles.wrapper}>
       <div className={styles.card}>
         <div className={styles.logoWrap}>
-          <span className={styles.logoIcon}>🌙</span>
+          <MoonIcon size={22} className={styles.logoIcon} />
           <span className={styles.logoText}>Moonlight</span>
         </div>
 

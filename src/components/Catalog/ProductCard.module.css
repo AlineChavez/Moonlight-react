@@ -25,7 +25,16 @@
   background: linear-gradient(135deg, var(--color-dark-roast), var(--color-medium-roast));
 }
 
-.categoryIcon { font-size: 3.5rem; opacity: 0.8; }
+.categoryIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  background: rgba(245, 237, 224, 0.1);
+  color: var(--color-latte);
+}
 
 .featuredBadge {
   position: absolute;
@@ -114,6 +123,10 @@
   margin-top: auto;
   width: 100%;
   padding: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
   background: var(--color-espresso);
   color: var(--color-cream);
   font-size: 0.82rem;

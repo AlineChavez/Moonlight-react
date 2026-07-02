@@ -1,0 +1,198 @@
+.page { padding-bottom: 6rem; min-height: 100vh; }
+
+.header {
+  background: var(--color-espresso);
+  padding: 7rem 2rem 3rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--color-cream);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.loading {
+  color: rgba(26,15,10,0.45);
+  text-align: center;
+  padding: 3rem;
+}
+
+.newBtn {
+  align-self: flex-start;
+  padding: 0.8rem 1.5rem;
+  background: var(--color-espresso);
+  color: var(--color-cream);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background var(--transition);
+}
+.newBtn:hover { background: var(--color-medium-roast); }
+
+.form {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.formTitle {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-espresso);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+  align-items: end;
+}
+
+.field { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(26,15,10,0.55);
+}
+
+.input, .textarea {
+  padding: 0.75rem 1rem;
+  background: var(--color-foam);
+  border: 1.5px solid var(--color-latte);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  color: var(--color-espresso);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  width: 100%;
+  resize: vertical;
+}
+.input:focus, .textarea:focus {
+  outline: none;
+  border-color: var(--color-caramel);
+  box-shadow: 0 0 0 3px rgba(192,125,58,0.15);
+}
+.inputError { border-color: var(--color-error); }
+
+.error {
+  font-size: 0.75rem;
+  color: var(--color-error);
+}
+
+.checkboxField {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-espresso);
+  padding-bottom: 0.5rem;
+}
+
+.formActions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.saveBtn {
+  padding: 0.8rem 1.75rem;
+  background: var(--color-espresso);
+  color: var(--color-cream);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background var(--transition), opacity var(--transition);
+}
+.saveBtn:hover:not(:disabled) { background: var(--color-medium-roast); }
+.saveBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.cancelFormBtn {
+  padding: 0.8rem 1.75rem;
+  background: none;
+  border: 1.5px solid var(--color-latte);
+  color: var(--color-espresso);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.cancelFormBtn:hover { background: var(--color-latte); }
+
+.tableWrap {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.table th {
+  text-align: left;
+  padding: 1rem 1.25rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(26,15,10,0.5);
+  border-bottom: 1px solid var(--color-latte);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--color-latte);
+  color: var(--color-espresso);
+  vertical-align: middle;
+}
+
+.table tr:last-child td { border-bottom: none; }
+
+.actionsCell {
+  display: flex;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.editBtn, .deleteBtn {
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-md);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.editBtn {
+  background: var(--color-latte);
+  color: var(--color-espresso);
+}
+.editBtn:hover { background: var(--color-caramel); color: var(--color-white); }
+
+.deleteBtn {
+  background: none;
+  border: 1.5px solid var(--color-error);
+  color: var(--color-error);
+}
+.deleteBtn:hover:not(:disabled) { background: var(--color-error); color: var(--color-white); }
+.deleteBtn:disabled { opacity: 0.6; cursor: not-allowed; }

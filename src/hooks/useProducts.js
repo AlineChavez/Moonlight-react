@@ -6,6 +6,7 @@ export function useProducts(initialCategory = 'all') {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [category, setCategory] = useState(initialCategory)
+  const [categories, setCategories] = useState([])
 
   const fetchProducts = useCallback(async () => {
     setLoading(true)
@@ -26,5 +27,11 @@ export function useProducts(initialCategory = 'all') {
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { fetchProducts() }, [fetchProducts])
 
-  return { products, loading, error, category, setCategory, refetch: fetchProducts }
+  useEffect(() => {
+    productService.getCategories()
+      .then(setCategories)
+      .catch(() => setCategories([]))
+  }, [])
+
+  return { products, loading, error, category, setCategory, categories, refetch: fetchProducts }
 }

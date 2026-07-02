@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useCart } from '../../context/CartContext'
 import { formatPrice } from '../../utils/formatters'
+import { CoffeeIcon, DropletIcon, SnowflakeIcon, SparkleIcon, CheckIcon } from '../icons/Icons'
 import styles from './ProductCard.module.css'
 
 const SIZES = [
@@ -21,10 +22,10 @@ const PRODUCT_IMAGES = {
 }
 
 const CATEGORY_ICONS = {
-  espresso: '☕',
-  filtrado: '🫗',
-  frio: '🧊',
-  especial: '✨',
+  espresso: CoffeeIcon,
+  filtrado: DropletIcon,
+  frio: SnowflakeIcon,
+  especial: SparkleIcon,
 }
 
 export default function ProductCard({ product }) {
@@ -35,6 +36,7 @@ export default function ProductCard({ product }) {
   const size = SIZES.find(s => s.id === selectedSize)
   const finalPrice = product.price * size.multiplier
   const imageUrl = PRODUCT_IMAGES[product.id]
+  const CategoryIcon = CATEGORY_ICONS[product.category] || CoffeeIcon
 
   const handleAdd = () => {
     addItem({ ...product, price: finalPrice }, 1, selectedSize)
@@ -54,7 +56,7 @@ export default function ProductCard({ product }) {
         ) : (
           <div className={styles.imagePlaceholder}>
             <span className={styles.categoryIcon}>
-              {CATEGORY_ICONS[product.category] || '☕'}
+              <CategoryIcon size={32} />
             </span>
           </div>
         )}
@@ -97,7 +99,11 @@ export default function ProductCard({ product }) {
           onClick={handleAdd}
           disabled={!product.available}
         >
-          {!product.available ? 'No disponible' : added ? '¡Agregado! ✓' : 'Agregar al carrito'}
+          {!product.available ? 'No disponible' : added ? (
+            <>
+              <CheckIcon size={15} /> Agregado
+            </>
+          ) : 'Agregar al carrito'}
         </button>
       </div>
     </article>

@@ -1,12 +1,18 @@
 import { useState } from 'react'
 import ProductCard from '../components/Catalog/ProductCard'
 import { useProducts } from '../hooks/useProducts'
-import { CATEGORIES } from '../services/productService'
+import { capitalize } from '../utils/formatters'
+import { SearchIcon, AlertIcon } from '../components/icons/Icons'
 import styles from './CatalogPage.module.css'
 
 export default function CatalogPage() {
-  const { products, loading, category, setCategory } = useProducts()
+  const { products, loading, error, category, setCategory, categories, refetch } = useProducts()
   const [search, setSearch] = useState('')
+
+  const categoryOptions = [
+    { id: 'all', label: 'Todos' },
+    ...categories.map(c => ({ id: c, label: capitalize(c) })),
+  ]
 
   const filtered = products.filter(p =>
     p.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -26,7 +32,7 @@ export default function CatalogPage() {
       <div className={styles.container}>
         <div className={styles.controls}>
           <div className={styles.categories}>
-            {CATEGORIES.map(cat => (
+            {categoryOptions.map(cat => (
               <button
                 key={cat.id}
                 className={`${styles.catBtn} ${category === cat.id ? styles.catBtnActive : ''}`}
@@ -39,9 +45,7 @@ export default function CatalogPage() {
 
           <label className={styles.searchWrap}>
             <span className={styles.searchIcon}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-              </svg>
+              <SearchIcon size={16} />
             </span>
             <input
               type="search"
@@ -59,9 +63,15 @@ export default function CatalogPage() {
               <div key={i} className={styles.skeleton} />
             ))}
           </div>
+        ) : error ? (
+          <div className={styles.empty}>
+            <AlertIcon size={32} />
+            <p>{error}</p>
+            <button className={styles.retryBtn} onClick={refetch}>Reintentar</button>
+          </div>
         ) : filtered.length === 0 ? (
           <div className={styles.empty}>
-            <span>🔍</span>
+            <SearchIcon size={32} />
             <p>No encontramos resultados para &quot;{search}&quot;</p>
           </div>
         ) : (

@@ -14,10 +14,5 @@ export const authService = {
   async getProfile() {
     const { data } = await api.get('/auth/me')
     return data
-  },
-
-  async updateProfile(payload) {
-    const { data } = await api.put('/auth/me', payload)
-    return data
   }
 }

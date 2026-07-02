@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { MoonIcon } from '../icons/Icons'
 import styles from './Hero.module.css'
 
 export default function Hero() {
@@ -15,7 +16,7 @@ export default function Hero() {
       </div>
 
       <div className={styles.content}>
-        <p className={styles.eyebrow}>🌙 Moonlight Café · Arequipa</p>
+        <p className={styles.eyebrow}><MoonIcon size={14} /> Moonlight Café · Arequipa</p>
         <h1 className={styles.title}>
           Café bajo<br />
           <em>la luna</em>

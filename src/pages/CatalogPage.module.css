@@ -133,7 +133,17 @@
    align-items: center;
    gap: 1rem;
  }
- .empty span { font-size: 2.5rem; }
+ .empty svg { opacity: 0.6; }
+
+ .retryBtn {
+   padding: 0.7rem 1.5rem;
+   background: var(--color-espresso);
+   color: var(--color-cream);
+   border-radius: var(--radius-full);
+   font-size: 0.85rem;
+   transition: background var(--transition);
+ }
+ .retryBtn:hover { background: var(--color-medium-roast); }
 
  @media (max-width: 600px) {
    .controls { flex-direction: column; align-items: flex-start; }

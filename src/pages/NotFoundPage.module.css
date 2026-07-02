@@ -10,7 +10,7 @@
 }
 
 .icon {
-  font-size: 4rem;
+  color: var(--color-caramel);
   opacity: 0.5;
 }
 

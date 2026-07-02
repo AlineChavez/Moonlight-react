@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Hero from '../components/Hero/Hero'
 import ProductCard from '../components/Catalog/ProductCard'
 import { useProducts } from '../hooks/useProducts'
+import { LeafIcon, FlameIcon, HeartIcon, GlobeIcon } from '../components/icons/Icons'
 import styles from './HomePage.module.css'
 
 export default function HomePage() {
@@ -43,7 +44,9 @@ export default function HomePage() {
           <div className={styles.valuesGrid}>
             {VALUES.map(v => (
               <div key={v.title} className={styles.valueCard}>
-                <span className={styles.valueIcon}>{v.icon}</span>
+                <span className={styles.valueIcon}>
+                  <v.icon size={24} />
+                </span>
                 <h3 className={styles.valueTitle}>{v.title}</h3>
                 <p className={styles.valueText}>{v.text}</p>
               </div>
@@ -56,8 +59,8 @@ export default function HomePage() {
 }
 
 const VALUES = [
-  { icon: '🌱', title: 'Origen Directo', text: 'Granos seleccionados directamente de productores en Perú, Colombia y Etiopía.' },
-  { icon: '🔥', title: 'Tostión Artesanal', text: 'Tostamos en pequeños lotes cada semana para garantizar frescura máxima.' },
-  { icon: '✋', title: 'Preparación Manual', text: 'Cada taza preparada a mano por baristas certificados con pasión por el café.' },
-  { icon: '🌍', title: 'Comercio Justo', text: 'Pagamos precios justos que apoyan la vida digna de los caficultores.' },
+  { icon: LeafIcon, title: 'Origen Directo', text: 'Granos seleccionados directamente de productores en Perú, Colombia y Etiopía.' },
+  { icon: FlameIcon, title: 'Tostión Artesanal', text: 'Tostamos en pequeños lotes cada semana para garantizar frescura máxima.' },
+  { icon: HeartIcon, title: 'Preparación Manual', text: 'Cada taza preparada a mano por baristas certificados con pasión por el café.' },
+  { icon: GlobeIcon, title: 'Comercio Justo', text: 'Pagamos precios justos que apoyan la vida digna de los caficultores.' },
 ]

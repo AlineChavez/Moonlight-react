@@ -105,9 +105,15 @@
 }
 
 .valueIcon {
-  font-size: 2rem;
-  display: block;
-  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 1.25rem;
+  border-radius: var(--radius-full);
+  background: rgba(192, 125, 58, 0.12);
+  color: var(--color-caramel);
 }
 
 .valueTitle {
